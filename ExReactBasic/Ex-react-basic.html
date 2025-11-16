@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>React Basics</title>
+</head>
+
+<body>
+    <div class="js-container"></div>
+  
+    <script src="https://unpkg.com/dayjs@1.11.7/dayjs.min.js"></script>
+    <script>
+        console.log(dayjs().format('MM/DD/YYYY'));
+        console.log(dayjs().format('hh:mm:ss'));
+    </script>
+
+    <script src="reactBasic.js"></script>
+    <script src="https://unpkg.com/supersimpledev@8.6.4/external-library.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+        // const button = <button>Click Me!</button>;
+        // const para = <p>hello para</p>
+        // la.Using React, display a button on the website with the text
+        //     "Good job!" inside the button.
+         const button =  <button>GoodJob!</button>
+        //  1b.Using React, display a paragraph with the text "My name is [NAME]"on the website(replace[NAME] with your name).
+        const para = <p>My name is MedHabib</p>;
+           // Create the design on the right and display it on the
+          // website using React.
+        const div = (
+            <div>
+                <p>Cotton</p>
+                <p>price : 10$</p>
+                <button>add to cart</button>
+            </div>
+        )
+
+        
+
+//         You buy 1 pack of socks for $10 and 2 T - shirts for $8 each.Using
+// JavaScript, calculate the total cost of this order, save it in a
+// variable named productCost, and display it in the Console.
+         const socksPrice = <p>{10+(2*8)}$</p>
+         console.log(10 + (2 * 8))       
+        //  Continuing from le, let's pretend the shipping cost is $5. Save this in a
+        // variable named shippingCost, calculate the total cost using JavaScript
+            // (productCost + shippingCost), and display the results on the website
+        
+       
+         
+        const container = document.querySelector('.js-container');
+        ReactDOM.createRoot(container).render(button);
+        ReactDOM.createRoot(container).render(para);
+        ReactDOM.createRoot(container).render(div);
+        ReactDOM.createRoot(container).render(socksPrice);
+    </script>
+   
+
+
+</body>
+
+</html>

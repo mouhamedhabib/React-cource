@@ -16,10 +16,16 @@
 
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
-        const button = <button>Click Me!</button>;
-        const para = <p>hello para</p>
+        // const button = <button>Click Me!</button>;
+        // const para = <p>hello para</p>
+         const div = (
+            <div>
+                 <button>Click Me!</button>
+                 <p>hello para {2+2}</p>
+            </div>
+         );
         const container = document.querySelector('.js-container');
-        ReactDOM.createRoot(container).render(para);
+        ReactDOM.createRoot(container).render(div);
     </script>
 </body>
 

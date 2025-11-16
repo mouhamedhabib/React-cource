@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>React Chat Bot</title>
+</head>
+
+<body>
+    <div class="js-container"></div>
+
+    <script src="reactBasic.js"></script>
+    <script src="https://unpkg.com/supersimpledev@8.6.4/external-library.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+           function ChatBotInput(){
+            return(
+                <div> 
+                  <input 
+                    type="text" 
+                    placeholder="send your message " 
+                    size="30" />
+                  <button>Send</button>  
+                </div>
+            )
+           }
+           function ChatBotMessages({message , sender}){
+            /*
+            const message = props.message;
+            const sender = props.sender;
+            we can also shortCut it as bellow named destructuring
+            const {variabl} = props 
+            we can also make another Short cat in parametre of function  like this 
+            function ChatBotMessages({message , sender}) 
+            const {message , sender} = props;
+            We can also make shorcut with if condition like below
+            { sender === 'robt' && ( ... ) }           
+            if (sender === 'robot'){
+                return(
+                    <div>
+                        <img src="robot.png" width="50" />
+                        {message}
+                    </div>
+                )
+
+            }
+            */
+            return( 
+                <div> 
+                    {sender === 'robot' && (
+                        <img src="robot.png" 
+                        width="50" />)}
+                   {message}
+                   {sender === 'user' && (
+                        <img src="user.png" 
+                        width="50" 
+                    />)}
+                </div>
+            )
+           }
+           function App(){
+            return (
+                  <div>
+                    <ChatBotInput />
+                    <ChatBotMessages
+                        message="hello chat bot "
+                        sender="user"
+                    />
+                    <ChatBotMessages
+                        message="hello How can help you ? "
+                        sender="robot"
+                    />
+                    <ChatBotMessages
+                        message="Can you make today date ? "
+                        sender="user"
+                    />
+                    <ChatBotMessages
+                        message="Todays is november 11 "
+                        sender="robot"
+                    />
+                </div>
+            )
+           }
+       
+        const container = document.querySelector('.js-container');
+        ReactDOM.createRoot(container).render(<App />);
+    </script>
+</body>
+
+</html>
