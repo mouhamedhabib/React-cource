@@ -12,18 +12,49 @@
     <script src="https://unpkg.com/supersimpledev@8.6.4/external-library.js"></script>
 
     <script src="https://unpkg.com/supersimpledev/react.js"></script>
+        <script src="https://unpkg.com/supersimpledev/chatbot.js"></script>
+
     <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
 
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
-           function ChatBotInput(){
+           function ChatBotInput({chatMessage , setChatMessage}){
+            const [inputText , setInputText] = React.useState('');
+            function saveInputChange(event){
+                  setInputText(event.target.value);
+            }
+            function sendMessage(){
+               setChatMessage([
+                    ...chatMessage,
+                    {
+                        message: inputText,
+                        sender: "user",
+                        id: crypto.randomUUID()
+                    }
+                ]);
+                const response = Chatbot.getResponse(inputText);
+                console.log(response);
+                setChatMessage((prevChatMessage) => [
+                    ...prevChatMessage,
+                    {
+                        message: response,
+                        sender: "robot",
+                        id: crypto.randomUUID()
+                    }
+                ]);
+            }
             return(
                 <div> 
                   <input 
                     type="text" 
                     placeholder="send your message " 
-                    size="30" />
-                  <button>Send</button>  
+                    size="30" 
+                    onChange = {saveInputChange}
+                    value={inputText}
+                    />
+                  <button
+                  onClick = {sendMessage}
+                  >Send</button>  
                 </div>
             )
            }
@@ -61,25 +92,59 @@
                 </div>
             )
            }
+           function ChatMessage({chatMessage}){
+               
+                return (
+                    <>
+                    {chatMessage.map((chat) => (
+                        <ChatBotMessages 
+                            message={chat.message} 
+                            sender={chat.sender} 
+                            key={chat.id} 
+                        />
+                    ))}
+                    </>
+                )
+                  
+               }
+           
            function App(){
+                const [chatMessage, setChatMessage] = React.useState(
+                   [{
+                       message: "hello chat bot ",
+                       sender: "user",
+                       id: 'id1'
+                   },
+                   {
+                       message: "hello How can help you ? ",
+                       sender: "robot",
+                       id: 'id2'
+                   },
+                   {
+                       message: "Can you make today date ? ",
+                       sender: "user",
+                       id: 'id3'
+                   },
+                   {
+                       message: "Todays is november 11 ",
+                       sender: "robot",
+                       id: 'id4'
+                   }]);
+               /*
+               const chatMessage = array[0];
+               const setChatMessage = array[1];
+               */
+               // we can create a shorte cut for 2 chatMessage and setChatMessage like below using array destructuring
+               //const [chatMessage , setChatMessage ] = array
+               // we can also make another shortcut  like up 
             return (
                   <div>
-                    <ChatBotInput />
-                    <ChatBotMessages
-                        message="hello chat bot "
-                        sender="user"
-                    />
-                    <ChatBotMessages
-                        message="hello How can help you ? "
-                        sender="robot"
-                    />
-                    <ChatBotMessages
-                        message="Can you make today date ? "
-                        sender="user"
-                    />
-                    <ChatBotMessages
-                        message="Todays is november 11 "
-                        sender="robot"
+                   <ChatBotInput 
+                   chatMessage={chatMessage}
+                   setChatMessage={setChatMessage}
+                   />
+                    <ChatMessage 
+                    chatMessage={chatMessage}
                     />
                 </div>
             )
